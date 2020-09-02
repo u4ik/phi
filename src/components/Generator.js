@@ -5,12 +5,14 @@ import Draggable from 'react-draggable';
 const Generator = () => {
 
     const [firstNum, setFirstNum] = useState();
-    const [selectFirstNum, setSelectFirstNum] = useState();
+    const [selectFirstNum, setSelectFirstNum] = useState(false);
+
     const [secondNum, setSecondNum] = useState();
-    const [selectSecondNum, setSelectSecondNum] = useState();
+    const [selectSecondNum, setSelectSecondNum] = useState(false);
 
     const [thirdNum, setThirdNum] = useState();
-    const [selectThirdNum, setSelectThirdNum] = useState();
+    const [selectThirdNum, setSelectThirdNum] = useState(false);
+
     const [fourthNum, setFourthNum] = useState();
     const [fifthNum, setFifthNum] = useState();
     const [mBallNum, setMBallNum] = useState();
@@ -51,7 +53,7 @@ const Generator = () => {
         padding: '3%',
         minWidth: '100px',
         minHeight: '100px',
-        filter:  ballSelectHighLight2
+        filter: ballSelectHighLight2
     };
     const lottoNum3 = {
         fontSize: fontSize,
@@ -134,6 +136,9 @@ const Generator = () => {
             // if (secondNum == winning.winning_numbers.slice(3, 6)) {
             //     console.log(`This number: ${secondNum}, has won at the second position on : ${winning.draw_date.slice(0, 10)}`);
             // }
+            //     if (thirdNum == winning.winning_numbers.slice(6, 9)) {
+            //     console.log(`This number: ${thirdNum}, has won at the third position on : ${winning.draw_date.slice(0, 10)}`);
+            // }
             return (
                 <div key={index}>
                     {selectFirstNum ?
@@ -150,6 +155,15 @@ const Generator = () => {
 
                                 <ul >
                                     <li style={firstNumHisWinStyle} >The number: {secondNum}, has won at the second position on : {winning.draw_date.slice(0, 10)}`</li>
+                                </ul> : null}
+                        </div> : null
+                    }
+                    {selectThirdNum ?
+                        <div>
+                            {thirdNum == winning.winning_numbers.slice(6, 9) ?
+
+                                <ul >
+                                    <li style={firstNumHisWinStyle} >The number: {thirdNum}, has won at the third position on : {winning.draw_date.slice(0, 10)}`</li>
                                 </ul> : null}
                         </div> : null
                     }
@@ -176,32 +190,44 @@ const Generator = () => {
     return (
 
         <div style={{ margin: '0 auto', paddingTop: '5vh' }}>
-           
-            <div style={{ top:'6vh',left:'6vw',border: '0px solid rgb(201, 0, 1)', borderRadius: '20px', overflow: 'hidden', margin: '0px auto', maxWidth: '300px', maxHeight: '600px', marginBottom: '15%', filter: 'drop-shadow(1px 1px 1px black)',position:'fixed',transform:'scale(.6)' }}>
-       
+
+            <div style={{ top: '6vh', left: '6vw', border: '0px solid rgb(201, 0, 1)', borderRadius: '20px', overflow: 'hidden', margin: '0px auto', maxWidth: '300px', maxHeight: '600px', marginBottom: '15%', filter: 'drop-shadow(1px 1px 1px black)', position: 'fixed', transform: 'scale(.6)' }}>
+
                 <iframe title='Draw Counter' scrolling="no" src="https://lottery.com/" style={{ border: '0px none', marginLeft: '-55px', height: '400px', marginBottom: '', marginTop: '-290px', width: '420px' }}>
                 </iframe>
-              
+
             </div>
-         
+
             {generatorToggle ?
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', flexWrap: '', transform: 'scale(.6)', marginTop: '-15%' }}>
-                    <p style={lottoNum1}  onClick={() => {
+                    <p style={lottoNum1} onClick={() => {
                         setSelectFirstNum(true);
                         setSelectSecondNum(false);
+                        setSelectThirdNum(false);
                         setBallSelectHighlight1('drop-shadow(0px 15px 4px #EE1D25)')
                         setBallSelectHighlight2('drop-shadow(5px 5px 4px black)')
+                        setBallSelectHighlight3('drop-shadow(5px 5px 4px black)')
                     }}>{firstNum}</p>
                     <p style={dash}>-</p>
-                    <p style={lottoNum2}  onClick={() => {
+                    <p style={lottoNum2} onClick={() => {
                         setSelectFirstNum(false);
                         setSelectSecondNum(true);
+                        setSelectThirdNum(false);
                         setBallSelectHighlight2('drop-shadow(0px 15px 4px #EE1D25)')
 
                         setBallSelectHighlight1('drop-shadow(5px 5px 4px black)')
+                        setBallSelectHighlight3('drop-shadow(5px 5px 4px black)')
                     }}>{secondNum}</p>
                     <p style={dash}>-</p>
-                    <p style={lottoNum3}>{thirdNum}</p>
+                    <p style={lottoNum3}  onClick={() => {
+                        setSelectThirdNum(true)
+                          setSelectFirstNum(false);
+                          setSelectSecondNum(false);
+                          setBallSelectHighlight3('drop-shadow(0px 15px 4px #EE1D25)')
+                          setBallSelectHighlight2('drop-shadow(5px 5px 4px black)')
+                          setBallSelectHighlight1('drop-shadow(5px 5px 4px black)')
+                        
+                    }}>{thirdNum}</p>
                     <p style={dash}>-</p>
                     <p style={lottoNum4}>{fourthNum}</p>
                     <p style={dash}>-</p>
@@ -210,7 +236,7 @@ const Generator = () => {
                     <p style={lottoNumMBall}>{mBallNum}</p>
                 </div>
                 : null}
-                
+
             <button style={{ fontSize: '2rem', marginBottom: '4%', marginTop: '-10%', backgroundColor: 'rgba(255, 255, 255, .8)', color: 'black', borderRadius: '5%', outline: 'none', border: 'solid black 5px', padding: '2%', textShadow: '.5px .5px .5px blue', fontWeight: '550' }} onClick={() => {
 
                 changeRandom();
