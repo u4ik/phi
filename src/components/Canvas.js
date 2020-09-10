@@ -31,7 +31,7 @@ const Canvas = () => {
             ctx.strokeStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
             // ctx.strokeStyle = 'black'
             ctx.lineWidth = lineW
-                // ctx.lineWidth = 5
+            // ctx.lineWidth = 5
             ctx.beginPath();
             ctx.arc(x, y, 80, 0, Math.PI * 2);
             ctx.closePath();
@@ -41,7 +41,7 @@ const Canvas = () => {
             number++
             lineW += .01
             scale += .01
-                // lineW = 3 + Math.random() * 10
+            // lineW = 3 + Math.random() * 10
 
 
 
@@ -58,18 +58,16 @@ const Canvas = () => {
         animate();
     });
 
-    return ( <
-        div >
+    return (
+        <div >
 
-        <
-        canvas id = 'canvas1'
-        style = {
-            { position: 'absolute', top: '0', left: '0' } } >
+            <canvas id='canvas1'
+                style={
+                    { position: 'absolute', top: '0', left: '0' }
+                } >
 
 
-        <
-        /canvas> <
-        /div>
+            </canvas> </div>
     )
 
 }
